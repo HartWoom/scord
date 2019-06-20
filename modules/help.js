@@ -36,6 +36,8 @@ function displaySpecificHelp(args) {
 
     if (args[0] === "game")
         helpMessage += getGameHelpMessage();
+    if (args[0] === "trad")
+        helpMessage += getTradHelpMessage();
     helpMessage += "```";
 
     return helpMessage;
@@ -55,5 +57,11 @@ function displayGeneralHelp(commands) {
 function getGameHelpMessage() {
     let helpMessage = "game [NAME_OF_GAME]\t";
     helpMessage += "Set your activity on NAME_OF_GAME. If blank, resets back your activity";
+    return helpMessage;
+}
+
+function getTradHelpMessage() {
+    let helpMessage = "trad source dest message\t";
+    helpMessage += "Translate your message from source language to dest language. Message can be multiple words";
     return helpMessage;
 }

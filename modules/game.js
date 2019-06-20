@@ -12,7 +12,7 @@ module.exports = {
 
     let game = args.join(' ');
     user.setActivity(game).then(() => {
-      msg.delete().then().catch(console.errror);
+      msg.delete().then().catch(console.error);
     }).catch(console.error);
   }
 };

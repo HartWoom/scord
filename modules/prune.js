@@ -1,5 +1,5 @@
 module.exports = {
-    help: 'Prunes your last x messages (limit: 25)',
+    help: 'Prunes your last x messages',
     cmd: 'prune',
     args: 1,
 

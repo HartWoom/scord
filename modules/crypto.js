@@ -23,7 +23,7 @@ module.exports = {
       if (body['Response'] === 'Error')
         return msg.edit(body['Message']).then().catch(console.error);
 
-      msg.edit(`${currency}: $${body['EUR']}`)
+      msg.edit(`${currency}: €${body['EUR']}`)
         .then()
         .catch(console.error);
 
