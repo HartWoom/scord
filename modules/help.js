@@ -62,6 +62,7 @@ function getGameHelpMessage() {
 
 function getTradHelpMessage() {
     let helpMessage = "trad source dest message\t";
-    helpMessage += "Translate your message from source language to dest language. Message can be multiple words";
+    helpMessage += "Translate your message from source language to dest language. Message can be multiple words.\n Available languages are :" +
+        "ar, bg, zhCN, zhTW, hr, cs, da, nl, en, et, tl, fi, fr, de, el, iw, hi, hu, is, id, ga, it, ja, ko, la, lv, lt, mk, mt, no, fa, pl, pt, ro, ru, sr, sk, si, es, sv, th, tr, vi.";
     return helpMessage;
 }

@@ -4,37 +4,24 @@ module.exports = {
     args: 1,
 
     run: (msg, args) => {
-        let limit = parseInt(args[0]) + 1;
-        const fixedLimit = limit;
+        let limit = parseInt(args[0]);
 
         if (limit === 0)
-            msg.edit("Can't prune 0 message !").catch(console.error);
+            msg.edit("Can't prune 0 message !").then().catch(console.error);
         else {
-            msg.edit(`Pruning ${fixedLimit} messages...`)
+            msg.edit(`Pruning ${limit} messages...`)
                 .then()
                 .catch(console.error);
-            do {
-                let newLimit = limit % 25;
-                if (newLimit === 0)
-                    newLimit = 25;
-                console.log("newLimit:" + newLimit);
 
-                msg.channel.search({
-                    author: msg.author,
-                    channel: msg.channel,
-                    limit: newLimit
-                }).then((res) => {
-
-                    res.messages.forEach((m) => {
-                        m.forEach((m) => {
-                            if (m.hit)
-                                m.delete().then().catch();
-                        });
-                    });
-                }).catch(console.error);
-                limit -= newLimit;
-            } while (limit > 0);
-            msg.delete().then().catch();
+            msg.channel.fetchMessages({
+                limit: limit,
+                before: msg.id
+            })
+                .then(messages => {
+                    messages.filter(m => m.author.id === msg.author.id).deleteAll();
+                    msg.delete().then().catch(console.error);
+                })
+                .catch(console.error);
         }
     }
 };

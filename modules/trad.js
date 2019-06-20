@@ -31,7 +31,7 @@ module.exports = {
                     return msg.edit(body['message']).then().catch(console.error);
                 if (res.statusCode !== 200)
                     return msg.edit("API is down.").then().catch(console.error);
-                msg.edit(`Translation of \'${body['text']}\' from ${args[0]} to ${args[1]}: ${body['translation']}`)
+                msg.edit(`Translation of \'${body['text']}\' from ${body['src']} to ${body['dest']}: ${body['translation']}`)
                     .then().catch(console.error);
             });
     }

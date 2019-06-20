@@ -16,10 +16,10 @@ bot.on('ready', () => {
 bot.on('message', (msg) => {
 
   if (msg.author !== bot.user)
-    return
+    return;
 
   if (!msg.content.startsWith(config.prefix))
-    return
+    return;
 
   const cmd = msg.content.split(" ")[0].substring(config.prefix.length, msg.content.length);
   const args = msg.content.split(" ").splice(1);
@@ -50,7 +50,6 @@ else if (process.argv.length === 4) {
 }
 else {
   try {
-    //console.log(config.json)
     config = require(path.join(__dirname, 'config.json'));
   }
   catch (e) {
@@ -93,4 +92,4 @@ module.exports = {
   manager: manager,
   user: bot.user,
   bot: bot
-}
+};
