@@ -11,7 +11,7 @@ module.exports = {
       user = require('../app').user;
 
     let game = args.join(' ');
-    user.setGame(game).then(() => {
+    user.setActivity(game).then(() => {
       msg.delete().then().catch(console.errror);
     }).catch(console.error);
   }

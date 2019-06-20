@@ -5,21 +5,22 @@ let id = 0;
 
 const callback = (msg) => {
   if (msg.channel.id === id)
-    msg.react('🦃').then().catch(console.error);
-}
+    msg.react('🙃').then().catch(console.error);
+};
 
 module.exports = {
-  cmd: 'turkey',
-  help: 'Enable / disable turkey mode',
+  cmd: 'upsidedown',
+  help: 'Enable / disable upsidedown mode',
 
   run: (msg, args) => {
-    id = args[0] || 0;
     if (!enabled) {
       bot.on('message', callback);
+      id = msg.channel.id;
       enabled = true;
     }
     else {
       bot.removeListener('message', callback);
+      id = 0;
       enabled = false;
     }
     msg.edit(`State: ${enabled ? 'enabled' : 'disabled'}`)

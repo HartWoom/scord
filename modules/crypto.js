@@ -1,6 +1,6 @@
 const request = require('request');
 
-const apiUrl = 'https://min-api.cryptocompare.com/data/price?tsyms=USD&fsym=';
+const apiUrl = 'https://min-api.cryptocompare.com/data/price?tsyms=EUR&fsym=';
 
 module.exports = {
   help: 'Display a cryptocurrency price',
@@ -23,7 +23,7 @@ module.exports = {
       if (body['Response'] === 'Error')
         return msg.edit(body['Message']).then().catch(console.error);
 
-      msg.edit(`${currency}: $${body['USD']}`)
+      msg.edit(`${currency}: $${body['EUR']}`)
         .then()
         .catch(console.error);
 

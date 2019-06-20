@@ -10,6 +10,7 @@ RUN npm install
 
 # App sources
 COPY . /var/scord
+COPY config.json /var/scord
 
 # Run
 CMD [ "npm", "start" ]

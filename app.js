@@ -50,7 +50,8 @@ else if (process.argv.length === 4) {
 }
 else {
   try {
-    config = require(path.join(__dirname, 'config', 'config.json'));
+    //console.log(config.json)
+    config = require(path.join(__dirname, 'config.json'));
   }
   catch (e) {
     console.error('Couldn\'t load configuration.');
