@@ -4,8 +4,10 @@ const email = "antoine.hartwig@gmail.com";
 const password = "ThisIs4Password";
 
 module.exports = {
-    help: "Translate from one language to another",
-    cmd: "trad",
+    help: 'Translate from one language to another',
+    spechelp: 'trad source dest message\tTranslate your message from source language to dest language. Message can be multiple words. Available languages are :' +
+        'ar, bg, zhCN, zhTW, hr, cs, da, nl, en, et, tl, fi, fr, de, el, iw, hi, hu, is, id, ga, it, ja, ko, la, lv, lt, mk, mt, no, fa, pl, pt, ro, ru, sr, sk, si, es, sv, th, tr, vi.',
+    cmd: 'trad',
 
     run: (msg, args) => {
         if (args.length < 3)
@@ -28,11 +30,23 @@ module.exports = {
             },
             function(err, res, body) {
                 if (res.statusCode === 500)
-                    return msg.edit(body['message']).then().catch(console.error);
+                    return msg.edit(body['message'])
+                        .then(() => {
+                            setTimeout(() => {
+                                msg.delete().catch(console.error)
+                            }, 500)
+                        }).catch(console.error);
+
                 if (res.statusCode !== 200)
-                    return msg.edit("API is down.").then().catch(console.error);
+                    return msg.edit("API is down.")
+                        .then(() => {
+                            setTimeout(() => {
+                            msg.delete().catch(console.error)
+                        }, 500)
+                        }).catch(console.error);
+
                 msg.edit(`Translation of \'${body['text']}\' from ${body['src']} to ${body['dest']}: ${body['translation']}`)
-                    .then().catch(console.error);
+                    .catch(console.error);
             });
     }
 };

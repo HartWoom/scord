@@ -3,11 +3,9 @@ const bot = require('../app.js').bot;
 let enabled = false;
 let id = 0;
 
-//🙃
-
 bot.on('message', msg => {
     if (msg.author.id === id)
-        msg.react('🙃').then().catch(console.error);
+        msg.react('🙃').catch(console.error);
 });
 
 module.exports = {

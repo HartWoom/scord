@@ -25,13 +25,7 @@ bot.on('message', (msg) => {
   const args = msg.content.split(" ").splice(1);
 
   let commands = manager.commands;
-
-  commands.forEach((el) => {
-    if (el.cmd === cmd) {
-      manager.run(el, msg, args);
-    }
-  });
-
+  manager.run(commands[cmd], msg, args);
 });
 
 // Retrieve configuration

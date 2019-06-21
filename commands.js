@@ -1,6 +1,6 @@
 class CommandsManager {
   constructor() {
-    this._commands = [];
+    this._commands = {};
   }
 
   get commands() {
@@ -11,11 +11,11 @@ class CommandsManager {
     if (cmd.name === undefined)
       cmd.name = cmd.cmd;
 
-    this._commands.push(cmd);
+    this._commands[cmd.name] = cmd;
   }
 
   reset() {
-    this._commands = [];
+    this._commands = {};
   }
 
   run(el, msg, args) {

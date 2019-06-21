@@ -1,16 +1,16 @@
 const manager = require('../app.js').manager;
+let commands;
 
 module.exports = {
     help: 'Display this help!',
     cmd: 'help',
 
     run: (msg, args) => {
-
-        let commands = manager.commands;
         let helpMessage;
+        commands = manager.commands;
 
         if (args.length === 0)
-            helpMessage = displayGeneralHelp(commands);
+            helpMessage = displayGeneralHelp();
         else if (args.length === 1)
             helpMessage = displaySpecificHelp(args);
         else
@@ -34,35 +34,25 @@ function displayError() {
 function displaySpecificHelp(args) {
     let helpMessage = "```";
 
-    if (args[0] === "game")
-        helpMessage += getGameHelpMessage();
-    if (args[0] === "trad")
-        helpMessage += getTradHelpMessage();
+    let command = commands[args[0]];
+    if (command === undefined)
+        helpMessage += `Command ${args[0]} doesn't exist.`;
+    else if (command.hasOwnProperty('spechelp'))
+        helpMessage += command.spechelp;
+    else
+        helpMessage += `No specific help for ${args[0]}`;
     helpMessage += "```";
 
     return helpMessage;
 }
 
-function displayGeneralHelp(commands) {
+function displayGeneralHelp() {
     let helpMessage = '```';
 
-    commands.forEach((command) => {
-        helpMessage += `${command.cmd}\t\t${command.help}\n`;
+    Object.keys(commands).forEach(function(command) {
+        helpMessage += `${commands[command].cmd}\t\t${commands[command].help}\n`;
     });
     helpMessage += '```';
 
-    return helpMessage;
-}
-
-function getGameHelpMessage() {
-    let helpMessage = "game [NAME_OF_GAME]\t";
-    helpMessage += "Set your activity on NAME_OF_GAME. If blank, resets back your activity";
-    return helpMessage;
-}
-
-function getTradHelpMessage() {
-    let helpMessage = "trad source dest message\t";
-    helpMessage += "Translate your message from source language to dest language. Message can be multiple words.\n Available languages are :" +
-        "ar, bg, zhCN, zhTW, hr, cs, da, nl, en, et, tl, fi, fr, de, el, iw, hi, hu, is, id, ga, it, ja, ko, la, lv, lt, mk, mt, no, fa, pl, pt, ro, ru, sr, sk, si, es, sv, th, tr, vi.";
     return helpMessage;
 }

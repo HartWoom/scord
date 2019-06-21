@@ -7,10 +7,14 @@ module.exports = {
         let limit = parseInt(args[0]);
 
         if (limit === 0)
-            msg.edit("Can't prune 0 message !").then().catch(console.error);
+            msg.edit("Can't prune 0 message !")
+                .then(() => {
+                    setTimeout(() => {
+                        msg.delete().catch(console.error);
+                    }, 500)
+                }).catch(console.error);
         else {
             msg.edit(`Pruning ${limit} messages...`)
-                .then()
                 .catch(console.error);
 
             msg.channel.fetchMessages({
@@ -19,7 +23,7 @@ module.exports = {
             })
                 .then(messages => {
                     messages.filter(m => m.author.id === msg.author.id).deleteAll();
-                    msg.delete().then().catch(console.error);
+                    msg.delete().catch(console.error);
                 })
                 .catch(console.error);
         }

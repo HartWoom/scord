@@ -53,7 +53,7 @@ A simple Discord selfbot written in Node.JS.
 ### Accessing bot's user
 * You may need to access the current bot's user (as I did to write the `game` module).
 * `require('../app').user` is the only thing needed to access it. `app.js` exports an instance of the `ClientUser` class (a `discord.js` class). Though be aware that the export is valid only when the bot has logged in. Before that, `user` is `null`.
-* I suggest taking a look at the `modules/game.js` to fully understand.
+* I suggest taking a look at the `modules/activity.js` to fully understand.
 
 ### Examples
 * All current modules can be used as examples. They use all the feature described above and each file is less than 50 lines of code.
